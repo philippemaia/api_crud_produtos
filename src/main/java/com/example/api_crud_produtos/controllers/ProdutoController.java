@@ -1,5 +1,7 @@
 package com.example.api_crud_produtos.controllers;
 
+import com.example.api_crud_produtos.repositories.ProdutoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/produtos")
 public class ProdutoController {
 
+    @Autowired
+    private ProdutoRepository repository;
+
     @GetMapping
     public ResponseEntity listarTodosProdutos(){
-        return ResponseEntity.ok("OK");
+        var produtos = repository.findAll();
+        return ResponseEntity.ok(produtos);
     }
 }
