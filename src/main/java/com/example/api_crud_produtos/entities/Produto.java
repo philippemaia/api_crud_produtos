@@ -1,5 +1,6 @@
 package com.example.api_crud_produtos.entities;
 
+import com.example.api_crud_produtos.dtos.AtualizarProdutoDto;
 import com.example.api_crud_produtos.dtos.IncluirProdutoDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,5 +29,14 @@ public class Produto {
     public Produto(IncluirProdutoDto dto){
         this.nome = dto.nome();
         this.preco = dto.preco();
+    }
+
+    public void atualizarProduto(AtualizarProdutoDto dto) {
+        if(dto.nome() != null) {
+            this.nome = dto.nome();
+        }
+        if(dto.preco() != null) {
+            this.preco = dto.preco();
+        }
     }
 }

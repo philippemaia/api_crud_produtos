@@ -1,5 +1,6 @@
 package com.example.api_crud_produtos.controllers;
 
+import com.example.api_crud_produtos.dtos.AtualizarProdutoDto;
 import com.example.api_crud_produtos.dtos.DetalharProdutoDto;
 import com.example.api_crud_produtos.dtos.IncluirProdutoDto;
 import com.example.api_crud_produtos.entities.Produto;
@@ -37,10 +38,26 @@ public class ProdutoController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity detalharProduto(@PathVariable String id){
-        var produto = repository.getReferenceById(id);
+        var optionalProduto = repository.findById(id);
+        if(!optionalProduto.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        Produto produto = optionalProduto.get();
         var dto = new DetalharProdutoDto(produto);
         return ResponseEntity.ok(dto);
     }
 
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizarProduto(@RequestBody @Valid AtualizarProdutoDto dto){
+        var optionalProduto = repository.findById(dto.id());
+        if(!optionalProduto.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        Produto produto = optionalProduto.get();
+        produto.atualizarProduto(dto);
+        var produtoDto = new DetalharProdutoDto(produto);
+        return ResponseEntity.ok(produtoDto);
+    }
 
 }
