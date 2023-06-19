@@ -1,6 +1,7 @@
 package com.example.api_crud_produtos.controllers;
 
-import com.example.api_crud_produtos.dto.ProdutoDto;
+import com.example.api_crud_produtos.dtos.DetalharProdutoDto;
+import com.example.api_crud_produtos.dtos.IncluirProdutoDto;
 import com.example.api_crud_produtos.entities.Produto;
 import com.example.api_crud_produtos.repositories.ProdutoRepository;
 import jakarta.validation.Valid;
@@ -25,7 +26,7 @@ public class ProdutoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrarProduto(@RequestBody @Valid ProdutoDto dto, UriComponentsBuilder uriBuilder){
+    public ResponseEntity cadastrarProduto(@RequestBody @Valid IncluirProdutoDto dto, UriComponentsBuilder uriBuilder){
         Produto produto = new Produto(dto);
         repository.save(produto);
 
@@ -33,4 +34,13 @@ public class ProdutoController {
 
         return ResponseEntity.created(uri).body(new Produto(dto));
     }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity detalharProduto(@PathVariable String id){
+        var produto = repository.getReferenceById(id);
+        var dto = new DetalharProdutoDto(produto);
+        return ResponseEntity.ok(dto);
+    }
+
+
 }

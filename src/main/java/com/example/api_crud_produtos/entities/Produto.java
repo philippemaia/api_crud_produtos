@@ -1,6 +1,6 @@
 package com.example.api_crud_produtos.entities;
 
-import com.example.api_crud_produtos.dto.ProdutoDto;
+import com.example.api_crud_produtos.dtos.IncluirProdutoDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +25,7 @@ public class Produto {
     @Column
     private BigDecimal preco;
 
-    public Produto(ProdutoDto dto){
+    public Produto(IncluirProdutoDto dto){
         this.nome = dto.nome();
         this.preco = dto.preco();
     }
