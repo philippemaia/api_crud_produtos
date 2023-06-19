@@ -60,4 +60,15 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoDto);
     }
 
+    @DeleteMapping(value = "/{id}")
+    @Transactional
+    public ResponseEntity delatarProduto(@PathVariable String id){
+        var optionalProduto = repository.findById(id);
+        if(!optionalProduto.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
