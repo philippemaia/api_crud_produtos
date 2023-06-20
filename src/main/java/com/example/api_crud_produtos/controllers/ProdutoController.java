@@ -5,12 +5,15 @@ import com.example.api_crud_produtos.dtos.DetalharProdutoDto;
 import com.example.api_crud_produtos.dtos.IncluirProdutoDto;
 import com.example.api_crud_produtos.entities.Produto;
 import com.example.api_crud_produtos.repositories.ProdutoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/produtos")
@@ -38,10 +41,7 @@ public class ProdutoController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity detalharProduto(@PathVariable String id){
-        var optionalProduto = repository.findById(id);
-        if(!optionalProduto.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
+        Optional<Produto> optionalProduto = buscarProdutoPeloId(id);
         Produto produto = optionalProduto.get();
         var dto = new DetalharProdutoDto(produto);
         return ResponseEntity.ok(dto);
@@ -50,10 +50,7 @@ public class ProdutoController {
     @PutMapping
     @Transactional
     public ResponseEntity atualizarProduto(@RequestBody @Valid AtualizarProdutoDto dto){
-        var optionalProduto = repository.findById(dto.id());
-        if(!optionalProduto.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
+        Optional<Produto> optionalProduto = buscarProdutoPeloId(dto.id());
         Produto produto = optionalProduto.get();
         produto.atualizarProduto(dto);
         var produtoDto = new DetalharProdutoDto(produto);
@@ -63,12 +60,17 @@ public class ProdutoController {
     @DeleteMapping(value = "/{id}")
     @Transactional
     public ResponseEntity delatarProduto(@PathVariable String id){
-        var optionalProduto = repository.findById(id);
-        if(!optionalProduto.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
+        buscarProdutoPeloId(id);
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    private Optional<Produto> buscarProdutoPeloId(String id) {
+        var optionalProduto = repository.findById(id);
+        if(!optionalProduto.isPresent()){
+            throw new EntityNotFoundException();
+        }
+        return optionalProduto;
     }
 
 }
