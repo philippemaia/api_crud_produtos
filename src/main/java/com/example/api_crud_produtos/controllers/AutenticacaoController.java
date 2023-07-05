@@ -43,10 +43,12 @@ public class AutenticacaoController {
 
     @PostMapping("/register")
     public ResponseEntity registrarLogin(@RequestBody @Valid DadosResgistroDto data){
-        if(this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
+        if(this.repository.findByLogin(data.login()) != null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.senha());
-        Usuario novoUsuario = new Usuario(data.login(), encryptedPassword);
+        Usuario novoUsuario = new Usuario(data.login(), encryptedPassword, data.perfil());
 
         this.repository.save(novoUsuario);
 

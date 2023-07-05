@@ -1,5 +1,6 @@
 create table usuarios(
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
-    login varchar(100) not null,
-    senha varchar(255) not null
+    login VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    perfil VARCHAR(20) NOT NULL
 );

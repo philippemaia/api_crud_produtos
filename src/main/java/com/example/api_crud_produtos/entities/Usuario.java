@@ -28,13 +28,24 @@ public class Usuario implements UserDetails {
 
     private String senha;
 
+    private PerfilUsuario perfil;
+
     public Usuario(String login, String encryptedPassword) {
         this.login = login;
         this.senha = encryptedPassword;
     }
 
+    public Usuario(String login, String encryptedPassword, PerfilUsuario perfil) {
+        this.login = login;
+        this.senha = encryptedPassword;
+        this.perfil = perfil;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.perfil == PerfilUsuario.ADMIN){
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
