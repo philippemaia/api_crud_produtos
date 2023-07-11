@@ -1,11 +1,12 @@
 # API de Autenticação CRUD de Produtos
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![SpringBoot](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
-O project é usado pelas seguintes tecnologias **Java 17, Maven, Spring Boot 3, Spring Security, PostgresSQL, Flyway Migrations e JWT.**
+O project é usado pelas seguintes tecnologias **Java 17, Maven, Spring Boot 3, Spring Security, JPA, Hibernate, PostgresSQL, Flyway Migrations e JWT.**
 
 ## Configuração de Ambiente
 
