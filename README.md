@@ -6,7 +6,7 @@
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
-O project é usado pelas seguintes tecnologias **Java 17, Maven, Spring Boot 3, Spring Security, JPA, Hibernate, PostgresSQL, Flyway Migrations e JWT.**
+O projeto é usado pelas seguintes tecnologias **Java 17, Maven, Spring Boot 3, Spring Security, JPA, Hibernate, PostgresSQL, Flyway Migrations e JWT.**
 
 ## Configuração de Ambiente
 
@@ -18,7 +18,7 @@ git clone https://github.com/philippemaia/api_crud_produtos.git
 
 2. Instalar as dependências do maven no arquivo pom.xml
 
-3. Instalar o banco de dados [PostgresSQL](https://www.postgresql.org/) que é necessário da base de dados são gerenciadas usando Flyway Migrations.
+3. Instalar o banco de dados [PostgresSQL](https://www.postgresql.org/) as tabelas são gerenciadas através de Flyway Migrations.
 
 ## Uso da API
 
